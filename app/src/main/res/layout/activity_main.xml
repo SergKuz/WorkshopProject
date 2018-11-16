@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data></data>
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/annonce.main.coordinator"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/refresh_button"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="@string/refresh_users"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler"

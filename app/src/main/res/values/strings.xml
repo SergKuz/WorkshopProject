@@ -31,4 +31,5 @@
     </string>
     <string name="text_header">Header of the text</string>
     <string name="another_text">Another text</string>
+    <string name="refresh_users">Add users</string>
 </resources>

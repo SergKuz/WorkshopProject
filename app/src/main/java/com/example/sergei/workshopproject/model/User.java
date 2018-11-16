@@ -2,13 +2,13 @@ package com.example.sergei.workshopproject.model;
 
 public class User {
 
-    private String username;
-    private String company;
+
+    private String username = "User";
+    private String company = "Google";
     public boolean isContact;
 
-    public User(String username, String company, boolean isContact) {
-        this.username = username;
-        this.company = company;
+    public User(int i, boolean isContact) {
+        this.username = this.username.concat(String.valueOf(i));
         this.isContact = isContact;
     }
 

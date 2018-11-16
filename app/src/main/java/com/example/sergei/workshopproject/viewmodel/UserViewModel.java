@@ -10,16 +10,37 @@ import java.util.List;
 
 public class UserViewModel extends ViewModel {
 
-    public MutableLiveData<User> rooms = new MutableLiveData<>();
-    public MutableLiveData<User> user = new MutableLiveData<>();
+    private int startWith = 0;
+    private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
 
     public List<User> generateUsersList() {
         List<User> result = new LinkedList<>();
 
-        for (int i= 0; i < 20; i++) {
-            result.add(new User("User ".concat(String.valueOf(i)), "Google", i%3 == 0));
+        if (startWith > 0) { // чтоб убедиться что вызовется только при втором вызове метода
+            try {
+                // создаем впечатление позднего ответа сервера
+                Thread.sleep(3000);
+            } catch (Exception e) {
+                // just for test empty
+            }
+        }
+
+        for (int i = 0; i < 20; i++, startWith++) {
+            result.add(new User(startWith, i % 3 == 0));
         }
 
         return result;
+    }
+
+    public void startLoading() {
+        this.isLoading.postValue(true);
+    }
+
+    public void endedLoading(){
+        this.isLoading.postValue(false);
+    }
+
+    public Boolean isLoading(){
+        return this.isLoading.getValue();
     }
 }

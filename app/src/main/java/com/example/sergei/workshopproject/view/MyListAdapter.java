@@ -15,14 +15,22 @@ import java.util.List;
 
 public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyViewHolder>{
 
-    private List<User> postList;
+    private List<User> userList;
     private LayoutInflater layoutInflater;
     private ListAdapterListener listener;
 
 
-    public MyListAdapter(List<User> postList, ListAdapterListener listener) {
-        this.postList = postList;
+    public MyListAdapter(List<User> userList, ListAdapterListener listener) {
+        this.userList = userList;
         this.listener = listener;
+    }
+
+    public void addAll(List<User> userList){
+        this.userList.addAll(userList);
+    }
+
+    public void clear(){
+        this.userList.clear();
     }
 
 
@@ -32,19 +40,22 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyViewHold
         if(layoutInflater == null){
             layoutInflater = LayoutInflater.from(parent.getContext());
         }
+
         ListItemBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.list_item,
                 parent, false);
+
         return new MyViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyListAdapter.MyViewHolder holder, final int position) {
-        holder.binding.setUser(postList.get(position));
+        holder.binding.setUser(userList.get(position));
+
         holder.binding.generalLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (listener != null) {
-                    listener.onItemClicked(postList.get(position));
+                    listener.onItemClicked(userList.get(position));
                 }
             }
         });
@@ -52,7 +63,7 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        return postList.size();
+        return userList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
