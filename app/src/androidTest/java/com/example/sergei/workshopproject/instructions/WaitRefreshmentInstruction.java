@@ -29,14 +29,6 @@ public class WaitRefreshmentInstruction extends Instruction {
 
         UserViewModel user = ViewModelProviders.of(mainActivity).get(UserViewModel.class);
 
-        while (user.isLoading() == null || user.isLoading()) {
-            try {
-                Thread.sleep(500);
-            } catch (Exception e) {
-                // just because of test
-            }
-        }
-
-        return true;
+        return user.isLoading() != null && !user.isLoading();
     }
 }
